@@ -8,7 +8,7 @@
 import UIKit
 
 class PostController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-   
+    
     @IBOutlet weak var tableView: UITableView!
     
     var posts : [PostModel] = []
@@ -20,10 +20,6 @@ class PostController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func postCollect(info:[PostModel]){
-//        for i in info{
-//            posts.append(i)
-//            tableView.reloadData()
-//        }
         var i = 0
         while i < 20 {
             posts.append(info[i])
@@ -53,6 +49,6 @@ class PostController: UIViewController,UITableViewDelegate,UITableViewDataSource
             destVC.data = (sender as! PostModel)
         }
     }
-
+    
 }
 

@@ -15,7 +15,6 @@ extension UIButton{
         let maskLayer1 = CAShapeLayer()
         maskLayer1.frame = bounds
         maskLayer1.path = maskPath1.cgPath
-        
         layer.mask = maskLayer1
     }
 }

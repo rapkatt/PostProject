@@ -6,6 +6,7 @@ target 'TestProject' do
   use_frameworks!
 
   pod 'Alamofire'
+  pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :tag => '4.2.0'
 
   # Pods for TestProject
 

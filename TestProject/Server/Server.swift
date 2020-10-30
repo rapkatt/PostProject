@@ -24,7 +24,7 @@ class Server{
                 DispatchQueue.main.async {
                     completion(data)
                 }
-        }
+            }
     }
     
     func commentShow(postId:String,completion: @escaping ([CommentModel])->()){
@@ -36,7 +36,7 @@ class Server{
                 DispatchQueue.main.async {
                     completion(data)
                 }
-        }
+            }
     }
     
     

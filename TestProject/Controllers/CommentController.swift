@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SwiftValidator
 
 class CommentController:UIViewController,UITableViewDelegate,UITableViewDataSource{
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     
@@ -43,29 +44,48 @@ class CommentController:UIViewController,UITableViewDelegate,UITableViewDataSour
     
     @IBAction func addCommentAction(_ sender: Any) {
         let alertController = UIAlertController(title: "Добавить новый комментарий", message: "", preferredStyle: UIAlertController.Style.alert)
+        let label = UILabel(frame: CGRect(x: 0, y: 65, width: 270, height:18))
+        label.textAlignment = .center
+        label.textColor = .red
+        label.font = label.font.withSize(12)
+        
+        alertController.view.addSubview(label)
+        label.isHidden = false
+        
+        
         alertController.addTextField { (textField : UITextField!) -> Void in
-                textField.placeholder = "Введите ваше имя"
-            }
+            textField.placeholder = "Введите ваше имя"
+        }
         alertController.addTextField { (textField : UITextField!) -> Void in
-                textField.placeholder = "Введите адрес почты"
-            }
+            textField.placeholder = "Введите адрес почты"
+        }
         alertController.addTextField { (textField : UITextField!) -> Void in
-                textField.placeholder = "Введите свой комментарий"
-            }
+            textField.placeholder = "Введите свой комментарий"
+        }
         let saveAction = UIAlertAction(title: "Добавить", style: UIAlertAction.Style.default, handler: { alert -> Void in
             let name = alertController.textFields![0].text
             let email = alertController.textFields![1].text
             let comment = alertController.textFields![2].text
             
-            self.addComment(info: CommentModel.init(name: name!, email: email!, body: comment!))
+            if let nameInput = name,let emailInput = email,let commentInput = comment  {
+                if nameInput == "" || emailInput == "" || commentInput == "" {
+                    label.text = ""
+                    label.text = "Заполните все поля"
+                    label.isHidden = false
+                    self.present(alertController, animated: true, completion: nil)
+                }else{
+                    self.addComment(info: CommentModel.init(name: name!, email: email!, body: comment!))
+                }
+            }
+            
         })
         let cancelAction = UIAlertAction(title: "Отмена", style: UIAlertAction.Style.default, handler: {
-                (action : UIAlertAction!) -> Void in })
+                                            (action : UIAlertAction!) -> Void in })
         
-            
-            alertController.addAction(saveAction)
-            alertController.addAction(cancelAction)
-            
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
         self.present(alertController, animated: true, completion: nil)
     }
     
